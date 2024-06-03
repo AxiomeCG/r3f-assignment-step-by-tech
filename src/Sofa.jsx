@@ -17,6 +17,10 @@ export function Sofa(props) {
 
     <PivotControls
       visible={snap.movableObject === 'Sofa'}
+      disableSliders={snap.movableObject !== 'Sofa'}
+      disableAxes={snap.movableObject !== 'Sofa'}
+      disableScaling={snap.movableObject !== 'Sofa'}
+      disableRotations={snap.movableObject !== 'Sofa'}
       anchor={[0, 0, 0]}
       onDragStart={() => {
         state.pivotDragged = true

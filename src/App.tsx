@@ -1,13 +1,14 @@
 import { Canvas, useThree } from "@react-three/fiber";
 import "./App.scss";
-import { Environment, Helper, OrbitControls } from "@react-three/drei";
+import { Environment, OrbitControls } from "@react-three/drei";
 import React from "react";
 import { Room } from "./Room";
-import { PointLightHelper, Vector3 } from "three";
-import { Bloom, EffectComposer, N8AO, Noise, Vignette } from "@react-three/postprocessing";
+import { Vector3 } from "three";
+import { Bloom, EffectComposer, N8AO, Vignette } from "@react-three/postprocessing";
 import { useSnapshot } from "valtio";
 import { state } from "./store";
 import { KernelSize } from "postprocessing";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Scene = () => {
 
@@ -28,10 +29,10 @@ const CameraControls = () => {
 
 
 function App() {
-
+  const snap = useSnapshot(state);
   return (
     <>
-      <Canvas camera={{position: [0, 1, 5]}} dpr={2}>
+      <Canvas camera={{position: [0, 1, 5]}} style={{overflow: "hidden"}} >
         <Scene/>
         <CameraControls/>
         <Environment preset={"night"} background={true}/>
@@ -41,6 +42,20 @@ function App() {
           <Vignette/>
         </EffectComposer>
       </Canvas>
+      <AnimatePresence>
+        {snap.curtainMenuIsOpen && <motion.div
+          initial={{x: 200}}
+          animate={{x: 0}}
+          exit={{x: 200}}
+          transition={{duration: 0.3, ease: "easeInOut"}}
+
+          className={"curtain-menu"}>
+          <div className={"curtain-menu__wrapper"}>
+            <div onClick={() => state.curtainTextureIndex = 0}>0</div>
+            <div onClick={() => state.curtainTextureIndex = 1}>1</div>
+          </div>
+        </motion.div>}
+      </AnimatePresence>
     </>
   );
 }
