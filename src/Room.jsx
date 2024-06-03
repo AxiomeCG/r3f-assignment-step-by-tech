@@ -13,10 +13,10 @@ import {
   useGLTF,
   useTexture
 } from '@react-three/drei'
-import {BackSide, MathUtils} from 'three';
+import {BackSide, MathUtils, RepeatWrapping} from 'three';
 import {Sofa} from './Sofa.jsx';
 import {useSnapshot} from 'valtio';
-import {state} from './store.js';
+import {resetMenu, state} from './store.js';
 import {useFrame} from '@react-three/fiber';
 
 
@@ -39,74 +39,74 @@ function Table(props) {
         state.pivotDragged = false
       }}
     >
-    <group {...props} dispose={null}
-           onClick={(e) => {
-             e.stopPropagation();
-             if (snap.movableObject === 'Table') {
-               state.movableObject = null;
-             } else {
-               state.movableObject = 'Table';
-             }
-           }}
-    >
+      <group {...props} dispose={null}
+             onClick={(e) => {
+               e.stopPropagation();
+               if (snap.movableObject === 'Table') {
+                 state.movableObject = null;
+               } else {
+                 state.movableObject = 'Table';
+               }
+             }}
+      >
 
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={props.nodes.Candle.geometry}
-        material={props.materials.niunai}
-        position={[-1.692, 1.452, -4.604]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={props.nodes.Candle002.geometry}
-        material={props.materials.niunai}
-        position={[-1.692, 1.452, -4.604]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={props.nodes.Glass001.geometry}
-        material={props.materials.boli}
-        position={[-1.694, 1.452, -4.606]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={props.nodes.Glass.geometry}
-        material={props.materials.boli}
-        position={[-1.694, 1.452, -4.606]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={props.nodes.Dishes.geometry}
-        material={props.materials.qita}
-        position={[-1.694, 1.452, -4.606]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={props.nodes.Leafs.geometry}
-        material={props.materials.lvzhi}
-        position={[-1.694, 1.452, -4.606]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={props.nodes.Table.geometry}
-        material={props.materials.zhuoyi}
-        position={[-1.694, 1.452, -4.606]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={props.nodes.TableCloth001.geometry}
-        material={props.materials.bu}
-        position={[-1.694, 1.452, -4.606]}
-      />
-    </group>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={props.nodes.Candle.geometry}
+          material={props.materials.niunai}
+          position={[-1.692, 1.452, -4.604]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={props.nodes.Candle002.geometry}
+          material={props.materials.niunai}
+          position={[-1.692, 1.452, -4.604]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={props.nodes.Glass001.geometry}
+          material={props.materials.boli}
+          position={[-1.694, 1.452, -4.606]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={props.nodes.Glass.geometry}
+          material={props.materials.boli}
+          position={[-1.694, 1.452, -4.606]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={props.nodes.Dishes.geometry}
+          material={props.materials.qita}
+          position={[-1.694, 1.452, -4.606]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={props.nodes.Leafs.geometry}
+          material={props.materials.lvzhi}
+          position={[-1.694, 1.452, -4.606]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={props.nodes.Table.geometry}
+          material={props.materials.zhuoyi}
+          position={[-1.694, 1.452, -4.606]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={props.nodes.TableCloth001.geometry}
+          material={props.materials.bu}
+          position={[-1.694, 1.452, -4.606]}
+        />
+      </group>
     </PivotControls>
   )
 }
@@ -116,7 +116,7 @@ function Carpet(props) {
   const snap = useSnapshot(state);
 
   return <PivotControls
-    anchor={[-1,0,0]}
+    anchor={[-1, 0, 0]}
 
     visible={snap.movableObject === 'Carpet'}
     disableSliders={snap.movableObject !== 'Carpet'}
@@ -201,19 +201,20 @@ const MovableObjects = (props) => {
     <Chair nodes={props.nodes} materials={props.materials} position={[-1, 1.093, -5.6]} rotation-y={Math.PI}/>
     <Chair nodes={props.nodes} materials={props.materials} position={[-2.287, 1.093, -3.6]}/>
     <Chair nodes={props.nodes} materials={props.materials} position={[-1, 1.093, -3.6]}/>
-    <Table nodes={props.nodes} materials={props.materials} />
+    <Table nodes={props.nodes} materials={props.materials}/>
   </>
 }
 
 function Curtain(props) {
 
-  const [ao, diffuse, normal, roughness ] = useTexture(["/curtain/leather/leather_white_ao_1k.jpg","/curtain/leather/leather_white_diff_1k.jpg","/curtain/leather/leather_white_nor_gl_1k.png","/curtain/leather/leather_white_rough_1k.png"])
-  const [ao2, diffuse2, normal2, roughness2 ] = useTexture(["/curtain/leather-black/black-leather_ao.png","/curtain/leather-black/black-leather_albedo.png","/curtain/leather-black/black-leather_normal-ogl.png","/curtain/leather-black/black-leather_roughness.png"])
+  const [ao, diffuse, normal, roughness] = useTexture(['/curtain/leather/leather_white_ao_1k.jpg', '/curtain/leather/leather_white_diff_1k.jpg', '/curtain/leather/leather_white_nor_gl_1k.png', '/curtain/leather/leather_white_rough_1k.png'])
+  const [ao2, diffuse2, normal2, roughness2] = useTexture(['/curtain/leather-black/black-leather_ao.png', '/curtain/leather-black/black-leather_albedo.png', '/curtain/leather-black/black-leather_normal-ogl.png', '/curtain/leather-black/black-leather_roughness.png'])
 
   const snap = useSnapshot(state)
   return (
     <>
       <group {...props} dispose={null} onClick={() => {
+        resetMenu()
         state.curtainMenuIsOpen = !state.curtainMenuIsOpen
       }}>
         <mesh
@@ -223,9 +224,9 @@ function Curtain(props) {
           material={props.materials.Curtain}
         >
           {snap.curtainTextureIndex === 0
-            && <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness} />}
+            && <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
           {snap.curtainTextureIndex === 1
-            && <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2} />}
+            && <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
         </mesh>
       </group>
     </>
@@ -233,23 +234,22 @@ function Curtain(props) {
 }
 
 
-
-
 function FloorLamp(props) {
-  const pointLightRef= useRef()
-  const materialRef= useRef()
+  const pointLightRef = useRef()
+  const materialRef = useRef()
   const isOnRef = useRef(true)
 
-  useFrame(() =>  {
-    pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 20 : 0, 0.05);
+  useFrame(() => {
+    pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 6 : 0, 0.05);
     materialRef.current.emissiveIntensity = MathUtils.lerp(materialRef.current.emissiveIntensity, isOnRef.current ? 7 : 0, 0.05);
   })
 
   return (
-    <group {...props} dispose={null} onClick={() => {
+    <group {...props} dispose={null} onClick={(e) => {
+      e.stopPropagation();
       isOnRef.current = !isOnRef.current
     }}>
-      <pointLight ref={pointLightRef} position={[6.1, 2.4, 5.5]} intensity={20} color={'#f8e5bd'}>
+      <pointLight ref={pointLightRef} position={[6.1, 2.4, 5.5]} intensity={6} color={'#f8e5bd'}>
         {/*<Helper type={PointLightHelper}/>*/}
       </pointLight>
       <mesh
@@ -258,7 +258,8 @@ function FloorLamp(props) {
         geometry={props.nodes.FloorLamp001.geometry}
         position={[6.32, 2.223, 5.553]}
       >
-        <meshStandardMaterial ref={materialRef} map={props.materials['Material.008'].map} emissive={'#fbeae0'} emissiveIntensity={5}/>
+        <meshStandardMaterial ref={materialRef} map={props.materials['Material.008'].map} emissive={'#fbeae0'}
+                              emissiveIntensity={5}/>
       </mesh>
       <mesh
         castShadow
@@ -273,77 +274,78 @@ function FloorLamp(props) {
 
 
 function CeilingLamp(props) {
-  const pointLightRef= useRef()
+  const pointLightRef = useRef()
   const isOnRef = useRef(true)
   const material = useMemo(() => props.materials.Plastico.clone(), []);
 
-  useFrame(() =>  {
+  useFrame(() => {
     pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 20 : 0, 0.05);
     material.emissiveIntensity = MathUtils.lerp(material.emissiveIntensity, isOnRef.current ? 7 : 0, 0.05);
   })
 
 
-
   return (
     <group {...props} dispose={null}>
-        <Sphere args={[0.5, 8,8]} visible={false} onClick={() => {
-          isOnRef.current = !isOnRef.current
-        }}/>
+      <Sphere args={[0.5, 8, 8]} visible={false} onClick={(e) => {
+        e.stopPropagation();
+        isOnRef.current = !isOnRef.current
+      }}/>
 
-        <pointLight ref={pointLightRef} position={props.lightPosition} intensity={20} color={'#f8e5bd'}>
-          {/*<Helper type={PointLightHelper}/>*/}
-        </pointLight>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={props.nodes.Object_42.geometry}
-          material={props.materials.Metal_Escuro}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={props.nodes.Object_42_1.geometry}
-          material={props.materials.Metal_Branco}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={props.nodes.Object_42_2.geometry}
-          material={material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={props.nodes.Object_42_3.geometry}
-          material={props.materials.Material_214597}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={props.nodes.Object_42_4.geometry}
-          material={props.materials.cromado}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={props.nodes.Object_42_5.geometry}
-          material={props.materials.Fio2}
-        />
+      <pointLight ref={pointLightRef} position={props.lightPosition} intensity={20} color={'#f8e5bd'}>
+        {/*<Helper type={PointLightHelper}/>*/}
+      </pointLight>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={props.nodes.Object_42.geometry}
+        material={props.materials.Metal_Escuro}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={props.nodes.Object_42_1.geometry}
+        material={props.materials.Metal_Branco}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={props.nodes.Object_42_2.geometry}
+        material={material}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={props.nodes.Object_42_3.geometry}
+        material={props.materials.Material_214597}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={props.nodes.Object_42_4.geometry}
+        material={props.materials.cromado}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={props.nodes.Object_42_5.geometry}
+        material={props.materials.Fio2}
+      />
     </group>
   )
 }
 
 
 function TableLamp(props) {
-  const pointLightRef= useRef()
+  const pointLightRef = useRef()
   const isOnRef = useRef(true)
-  useFrame(() =>  {
+  useFrame(() => {
     pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 30 : 0, 0.05);
   })
 
   return (
     <group {...props} dispose={null}>
-      <Sphere visible={false} onClick={() => {
+      <Sphere visible={false} onClick={(e) => {
+        e.stopPropagation();
         isOnRef.current = !isOnRef.current
       }}/>
 
@@ -360,6 +362,144 @@ function TableLamp(props) {
     </group>
   )
 }
+
+function Wall1(props) {
+  const [diffuse, ao, normal, roughness] = useTexture([
+    '/curtain/leather-black/black-leather_albedo.png',
+    '/curtain/leather-black/black-leather_ao.png',
+    '/curtain/leather-black/black-leather_normal-ogl.png',
+    '/curtain/leather-black/black-leather_roughness.png'
+  ])
+
+  const [diffuse2, ao2, normal2, roughness2] = useTexture([
+    '/wall/stone/stacked-stone-siding_albedo.png',
+    '/wall/stone/stacked-stone-siding_ao.png',
+    '/wall/stone/stacked-stone-siding_normal-ogl.png',
+    '/wall/stone/stacked-stone-siding_roughness.png'
+  ])
+
+  diffuse2.repeat.set(4, 2);
+  diffuse2.wrapS = diffuse2.wrapT = RepeatWrapping;
+  ao2.repeat.set(4, 2);
+  ao2.wrapS = ao2.wrapT = RepeatWrapping;
+  normal2.repeat.set(4, 2);
+  normal2.wrapS = normal2.wrapT = RepeatWrapping;
+  roughness2.repeat.set(4, 2);
+  roughness2.wrapS = roughness2.wrapT = RepeatWrapping;
+
+
+  const snap = useSnapshot(state)
+  return <mesh
+    castShadow
+    receiveShadow
+    geometry={props.nodes.Wall.geometry}
+    material={props.nodes.Wall.material}
+    position={[7.791, 2.45, -0.229]}
+    onClick={() => {
+      console.log('click')
+      resetMenu()
+      state.wall1MenuIsOpen = !state.wall1MenuIsOpen
+    }}
+  >
+    {snap.wall1TextureIndex === 0 && <meshStandardMaterial roughness={1}/>}
+    {snap.wall1TextureIndex === 1 && <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
+    {snap.wall1TextureIndex === 2 && <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
+
+  </mesh>
+}
+
+function Wall2(props) {
+  const [diffuse, ao, normal, roughness] = useTexture([
+    '/curtain/leather-black/black-leather_albedo.png',
+    '/curtain/leather-black/black-leather_ao.png',
+    '/curtain/leather-black/black-leather_normal-ogl.png',
+    '/curtain/leather-black/black-leather_roughness.png'
+  ])
+
+  const [diffuse2, ao2, normal2, roughness2] = useTexture([
+    '/wall/stone/stacked-stone-siding_albedo.png',
+    '/wall/stone/stacked-stone-siding_ao.png',
+    '/wall/stone/stacked-stone-siding_normal-ogl.png',
+    '/wall/stone/stacked-stone-siding_roughness.png'
+  ])
+
+  diffuse2.repeat.set(4, 2);
+  diffuse2.wrapS = diffuse2.wrapT = RepeatWrapping;
+  ao2.repeat.set(4, 2);
+  ao2.wrapS = ao2.wrapT = RepeatWrapping;
+  normal2.repeat.set(4, 2);
+  normal2.wrapS = normal2.wrapT = RepeatWrapping;
+  roughness2.repeat.set(4, 2);
+  roughness2.wrapS = roughness2.wrapT = RepeatWrapping;
+
+  const snap = useSnapshot(state)
+  return <mesh
+    castShadow
+    receiveShadow
+    geometry = {props.nodes.Wall001.geometry}
+    material = {props.nodes.Wall001.material}
+    position = {[-5.908, 2.45, - 0.229]}
+    onClick={() => {
+      console.log('click')
+      resetMenu()
+      state.wall2MenuIsOpen = !state.wall1MenuIsOpen
+    }}
+  >
+    {snap.wall2TextureIndex === 0 && <meshStandardMaterial roughness={1}/>}
+    {snap.wall2TextureIndex === 1 && <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
+    {snap.wall2TextureIndex === 2 && <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
+
+  </mesh>
+}
+
+
+
+function Wall3(props) {
+  const [diffuse, ao, normal, roughness] = useTexture([
+    '/curtain/leather-black/black-leather_albedo.png',
+    '/curtain/leather-black/black-leather_ao.png',
+    '/curtain/leather-black/black-leather_normal-ogl.png',
+    '/curtain/leather-black/black-leather_roughness.png'
+  ])
+
+  const [diffuse2, ao2, normal2, roughness2] = useTexture([
+    '/wall/stone/stacked-stone-siding_albedo.png',
+    '/wall/stone/stacked-stone-siding_ao.png',
+    '/wall/stone/stacked-stone-siding_normal-ogl.png',
+    '/wall/stone/stacked-stone-siding_roughness.png'
+  ])
+
+  diffuse2.repeat.set(4, 2);
+  diffuse2.wrapS = diffuse2.wrapT = RepeatWrapping;
+  ao2.repeat.set(4, 2);
+  ao2.wrapS = ao2.wrapT = RepeatWrapping;
+  normal2.repeat.set(4, 2);
+  normal2.wrapS = normal2.wrapT = RepeatWrapping;
+  roughness2.repeat.set(4, 2);
+  roughness2.wrapS = roughness2.wrapT = RepeatWrapping;
+
+
+  const snap = useSnapshot(state)
+  return <mesh
+    castShadow
+    receiveShadow
+    geometry={props.nodes.Wall002.geometry}
+    material={props.nodes.Wall002.material}
+    position={[0, 0.886, -8.44]}
+
+    onClick={() => {
+      console.log('click')
+      resetMenu()
+      state.wall3MenuIsOpen = !state.wall1MenuIsOpen
+    }}
+  >
+    {snap.wall3TextureIndex === 0 && <meshStandardMaterial roughness={1}/>}
+    {snap.wall3TextureIndex === 1 && <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
+    {snap.wall3TextureIndex === 2 && <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
+
+  </mesh>
+}
+
 
 export function Room(props) {
   const {nodes, materials} = useGLTF('/RoomDubai.glb')
@@ -538,27 +678,10 @@ export function Room(props) {
           material={materials.tvstand}
         />
       </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Wall.geometry}
-        material={nodes.Wall.material}
-        position={[7.791, 2.45, -0.229]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Wall001.geometry}
-        material={nodes.Wall001.material}
-        position={[-5.908, 2.45, -0.229]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Wall002.geometry}
-        material={nodes.Wall002.material}
-        position={[0, 0.886, -8.44]}
-      />
+      <Wall1 nodes={nodes}/>
+      <Wall2 nodes={nodes}/>
+      <Wall3 nodes={nodes}/>
+
       <mesh
         castShadow
         receiveShadow
