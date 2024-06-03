@@ -27,6 +27,10 @@ function Table(props) {
     <PivotControls
       anchor={[-1, 0.2, 0]}
       visible={snap.movableObject === 'Table'}
+      disableSliders={snap.movableObject !== 'Table'}
+      disableAxes={snap.movableObject !== 'Table'}
+      disableScaling={snap.movableObject !== 'Table'}
+      disableRotations={snap.movableObject !== 'Table'}
       onDragStart={() => {
         state.pivotDragged = true
       }}
@@ -112,7 +116,13 @@ function Carpet(props) {
 
   return <PivotControls
     anchor={[-1,0,0]}
+
     visible={snap.movableObject === 'Carpet'}
+    disableSliders={snap.movableObject !== 'Carpet'}
+    disableAxes={snap.movableObject !== 'Carpet'}
+    disableScaling={snap.movableObject !== 'Carpet'}
+    disableRotations={snap.movableObject !== 'Carpet'}
+
     onDragStart={() => {
       state.pivotDragged = true
     }}
@@ -150,6 +160,10 @@ function Chair(props) {
     <PivotControls
       anchor={[0, 0, 0]}
       visible={snap.movableObject === `Chair${uuid}`}
+      disableSliders={snap.movableObject !== `Chair${uuid}`}
+      disableAxes={snap.movableObject !== `Chair${uuid}`}
+      disableScaling={snap.movableObject !== `Chair${uuid}`}
+      disableRotations={snap.movableObject !== `Chair${uuid}`}
       onDragStart={() => {
         state.pivotDragged = true
       }}

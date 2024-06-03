@@ -9,19 +9,11 @@ import { useSnapshot } from "valtio";
 import { state } from "./store";
 import { KernelSize } from "postprocessing";
 
-const Lights = () => {
-  return <>
-
-
-  </>
-}
-
 const Scene = () => {
 
 
   return <>
     <Room/>
-    <Lights/>
   </>
 }
 
@@ -39,7 +31,7 @@ function App() {
 
   return (
     <>
-      <Canvas camera={{position: [0, 1, 5]}}>
+      <Canvas camera={{position: [0, 1, 5]}} dpr={2}>
         <Scene/>
         <CameraControls/>
         <Environment preset={"night"} background={true}/>
