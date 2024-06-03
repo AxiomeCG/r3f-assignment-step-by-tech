@@ -9,7 +9,8 @@ import {
   MeshTransmissionMaterial,
   PivotControls,
   Plane, Sphere,
-  useGLTF} from '@react-three/drei'
+  useGLTF, useTexture
+} from '@react-three/drei'
 import {BackSide, MathUtils, PointLightHelper} from 'three';
 import {Sofa} from './Sofa.jsx';
 import {useSnapshot} from 'valtio';
@@ -490,22 +491,15 @@ export function Room(props) {
         position={[0.961, 2.45, 22.047]}
         rotation={[0, Math.PI / 2, 0]}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Curtain_2.geometry}
-        material={materials.Curtain}
-        position={[-5.506, 3.119, -3.279]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Curtain_1.geometry}
-        material={materials.Curtain}
-        position={[-5.413, 2.426, -5.125]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
+
+      <Curtain      geometry={nodes.Curtain_1.geometry}
+                    materials={materials}
+                    position={[-5.413, 2.426, -5.125]}
+                    rotation={[Math.PI / 2, 0, 0]} />
+      <Curtain      geometry={nodes.Curtain_2.geometry}
+                    materials={materials}
+                    position={[-5.506, 3.119, -3.279]}
+                    rotation={[Math.PI / 2, 0, 0]}/>
       <Box
         castShadow
         receiveShadow
