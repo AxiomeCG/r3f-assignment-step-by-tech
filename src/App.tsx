@@ -44,7 +44,7 @@ function App() {
     <>
     <Canvas camera={{position: [0,1,5]}}>
         <Scene/>
-        <OrbitControls enabled={!state.pivotDragged}/>
+        <OrbitControls enabled={!state.pivotDragged} maxZoom={1} minZoom={0.1}/>
         <Environment preset={"night"} background={true}/>
       <EffectComposer>
         <N8AO halfRes/>

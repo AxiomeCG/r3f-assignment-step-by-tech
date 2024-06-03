@@ -1,5 +1,7 @@
 import React, {useMemo} from 'react'
-import {useGLTF} from '@react-three/drei'
+import {PivotControls, useGLTF} from '@react-three/drei'
+import {state} from './store.js';
+import {useSnapshot} from 'valtio';
 
 export function Sofa(props) {
   const {nodes, materials} = useGLTF('/Sofa.glb')
@@ -9,21 +11,44 @@ export function Sofa(props) {
   const footMaterial = useMemo(() => {
     return <meshStandardMaterial color={'#000000'} roughness={0.4} metalness={0.5}/>
   }, []);
+  const snap = useSnapshot(state);
 
   return (
-    <group {...props} dispose={null}>
+
+    <PivotControls
+      visible={snap.movableObject === 'Sofa'}
+      anchor={[0, 0, 0]}
+      onDragStart={() => {
+        state.pivotDragged = true
+      }}
+      onDragEnd={() => {
+        state.pivotDragged = false
+      }}
+    >
+    <group {...props} dispose={null}
+           onClick={(e) => {
+             e.stopPropagation();
+             if (snap.movableObject === 'Sofa') {
+               state.movableObject = null;
+             } else {
+               state.movableObject = 'Sofa';
+             }
+           }}
+    >
       <group position={[6.088, 0.665, 1.187]} rotation={[Math.PI / 2, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.Sofa001_1.geometry}
           material={materials['Mat3d66-713023-7-5315']}
+
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.Sofa001_2.geometry}
           material={materials['15 - Default']}
+
         />
         <mesh
           castShadow
@@ -44,6 +69,7 @@ export function Sofa(props) {
         </mesh>
       </group>
     </group>
+    </PivotControls>
   )
 }
 
