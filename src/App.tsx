@@ -4,26 +4,16 @@ import { Environment, Helper, OrbitControls } from "@react-three/drei";
 import React from "react";
 import { Room } from "./Room";
 import { PointLightHelper, Vector3 } from "three";
-import { EffectComposer, N8AO } from "@react-three/postprocessing";
+import { Bloom, EffectComposer, N8AO, Noise, Vignette } from "@react-three/postprocessing";
 import { useSnapshot } from "valtio";
 import { state } from "./store";
 
 const Lights = () => {
   return <>
-    <pointLight position={[-1.6, 4.4, -4.7]} intensity={10}>
+    <pointLight position={[-1.6, 4, -4.7]} intensity={40} color={"#f8e5bd"}>
       <Helper type={PointLightHelper}/>
     </pointLight>
 
-    <pointLight position={[-2, 4.4, 2]} intensity={10}>
-      <Helper type={PointLightHelper}/>
-    </pointLight>
-    <pointLight position={[3.7, 4.4, 2]} intensity={10}>
-      <Helper type={PointLightHelper}/>
-    </pointLight>
-
-    <pointLight position={[6.5, 2.4, 5.5]} intensity={10}>
-      <Helper type={PointLightHelper}/>
-    </pointLight>
   </>
 }
 
@@ -56,6 +46,8 @@ function App() {
         <Environment preset={"night"} background={true}/>
         <EffectComposer>
           <N8AO halfRes/>
+          <Bloom intensity={0.7} mipmapBlur/>
+          <Vignette/>
         </EffectComposer>
       </Canvas>
     </>
