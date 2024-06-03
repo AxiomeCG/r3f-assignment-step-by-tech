@@ -221,7 +221,7 @@ function FloorLamp(props) {
 
   useFrame(() =>  {
     pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 20 : 0, 0.05);
-    materialRef.current.emissiveIntensity = MathUtils.lerp(materialRef.current.emissiveIntensity, isOnRef.current ? 5 : 0, 0.05);
+    materialRef.current.emissiveIntensity = MathUtils.lerp(materialRef.current.emissiveIntensity, isOnRef.current ? 7 : 0, 0.05);
   })
 
   return (
@@ -254,19 +254,23 @@ function FloorLamp(props) {
 function CeilingLamp(props) {
   const pointLightRef= useRef()
   const isOnRef = useRef(true)
+  const material = useMemo(() => props.materials.Plastico.clone(), []);
 
   useFrame(() =>  {
     pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 20 : 0, 0.05);
+    material.emissiveIntensity = MathUtils.lerp(material.emissiveIntensity, isOnRef.current ? 7 : 0, 0.05);
   })
+
+
 
   return (
     <group {...props} dispose={null}>
-        <Sphere visible={false} onClick={() => {
+        <Sphere args={[0.5, 8,8]} visible={false} onClick={() => {
           isOnRef.current = !isOnRef.current
         }}/>
 
         <pointLight ref={pointLightRef} position={props.lightPosition} intensity={20} color={'#f8e5bd'}>
-          <Helper type={PointLightHelper}/>
+          {/*<Helper type={PointLightHelper}/>*/}
         </pointLight>
         <mesh
           castShadow
@@ -284,7 +288,7 @@ function CeilingLamp(props) {
           castShadow
           receiveShadow
           geometry={props.nodes.Object_42_2.geometry}
-          material={props.materials.Plastico}
+          material={material}
         />
         <mesh
           castShadow
@@ -304,6 +308,34 @@ function CeilingLamp(props) {
           geometry={props.nodes.Object_42_5.geometry}
           material={props.materials.Fio2}
         />
+    </group>
+  )
+}
+
+
+function TableLamp(props) {
+  const pointLightRef= useRef()
+  const isOnRef = useRef(true)
+  useFrame(() =>  {
+    pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 30 : 0, 0.05);
+  })
+
+  return (
+    <group {...props} dispose={null}>
+      <Sphere visible={false} onClick={() => {
+        isOnRef.current = !isOnRef.current
+      }}/>
+
+      <pointLight ref={pointLightRef} position={[0, -2, 0]} intensity={40} color={'#f8e5bd'}>
+        {/*<Helper type={PointLightHelper}/>*/}
+      </pointLight>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={props.nodes.TableLamp.geometry}
+        material={props.materials._1___Default}
+        rotation={[Math.PI / 2, 0, 0]}
+      />
     </group>
   )
 }
@@ -392,16 +424,11 @@ export function Room(props) {
 
         />
       </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.TableLamp.geometry}
-        material={materials._1___Default}
-        position={[-1.607, 5.84, -4.68]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
+
       <CeilingLamp position={[3.644, 4.268, 2.245]} rotation={[0, Math.PI / 2, 0]} lightPosition={[0, -0.5, 0]} nodes={nodes} materials={materials}/>
       <CeilingLamp position={[-2.052, 4.268, 2.245]} rotation={[0, Math.PI / 2, 0]} lightPosition={[0, -0.5, 0]} nodes={nodes} materials={materials}/>
+      <TableLamp         position={[-1.607, 5.84, -4.68]}
+                          nodes={nodes} materials={materials}/>
       <mesh
         castShadow
         receiveShadow

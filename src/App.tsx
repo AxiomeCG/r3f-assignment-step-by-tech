@@ -7,12 +7,11 @@ import { PointLightHelper, Vector3 } from "three";
 import { Bloom, EffectComposer, N8AO, Noise, Vignette } from "@react-three/postprocessing";
 import { useSnapshot } from "valtio";
 import { state } from "./store";
+import { KernelSize } from "postprocessing";
 
 const Lights = () => {
   return <>
-    <pointLight position={[-1.6, 4, -4.7]} intensity={40} color={"#f8e5bd"}>
-      <Helper type={PointLightHelper}/>
-    </pointLight>
+
 
   </>
 }
@@ -46,7 +45,7 @@ function App() {
         <Environment preset={"night"} background={true}/>
         <EffectComposer>
           <N8AO halfRes/>
-          <Bloom intensity={0.7} mipmapBlur/>
+          <Bloom intensity={0.5} mipmapBlur kernelSize={KernelSize.MEDIUM}/>
           <Vignette/>
         </EffectComposer>
       </Canvas>
