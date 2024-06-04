@@ -41,7 +41,7 @@ export function CeilingLamp(props) {
               }}
       />
 
-      <pointLight ref={pointLightRef} position={props.lightPosition} intensity={20} color={'#f8e5bd'}>
+      <pointLight ref={pointLightRef} position={props.lightPosition} intensity={20} color={'#f8e5bd'} castShadow>
         {/*<Helper type={PointLightHelper}/>*/}
       </pointLight>
       <mesh

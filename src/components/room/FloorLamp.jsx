@@ -27,7 +27,7 @@ export function FloorLamp(props) {
 
 
     >
-      <pointLight ref={pointLightRef} position={[6.1, 2.4, 5.5]} intensity={6} color={'#f8e5bd'}>
+      <pointLight ref={pointLightRef} position={[6.1, 2.4, 5.5]} intensity={6} color={'#f8e5bd'} castShadow>
         {/*<Helper type={PointLightHelper}/>*/}
       </pointLight>
       <mesh

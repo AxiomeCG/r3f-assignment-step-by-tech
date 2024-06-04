@@ -37,7 +37,7 @@ export function TableLamp(props) {
             }}
     />
 
-    <pointLight ref={pointLightRef} position={[0, -2, 0]} intensity={30} color={'#f8e5bd'}>
+    <pointLight ref={pointLightRef} position={[0, -2, 0]} intensity={30} color={'#f8e5bd'} castShadow>
       {/*<Helper type={PointLightHelper}/>*/}
     </pointLight>
     <mesh
