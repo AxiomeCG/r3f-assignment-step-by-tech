@@ -4,7 +4,7 @@ export const state = proxy({
   movableObject: null,
   pivotDragged: false,
   isOrbiting: false,
-  curtainTextureIndex: 0,
+  curtainTextureIndex: 2,
   curtainMenuIsOpen: false,
   wall1MenuIsOpen: false,
   wall2MenuIsOpen: false,
