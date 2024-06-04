@@ -5,6 +5,5 @@ import React from 'react';
 export const Scene = () => {
   return <>
     <Room/>
-    <Preload all/>
   </>
 }

@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import "./App.scss";
-import { Bvh, Environment, Loader } from "@react-three/drei";
+import { Bvh, Environment, Loader, Preload } from "@react-three/drei";
 import React, { Suspense } from "react";
 import { Bloom, EffectComposer, N8AO, Vignette } from "@react-three/postprocessing";
 import { KernelSize } from "postprocessing";
@@ -26,6 +26,7 @@ function App() {
             <Vignette/>
           </EffectComposer>
         </Suspense>
+        <Preload all/>
 
       </Canvas>
       <Overlay/>
