@@ -70,6 +70,14 @@ function Overlay() {
             <img src={"/curtain/leather-black/black-leather_albedo.png"} width={100} height={100}/>
 
           </div>
+
+          <div onClick={() => {
+            state.curtainTextureIndex = 2
+            resetMenu();
+          }}>
+            <img src={"/curtain/coarse/coarse-loose-fabric_albedo.png"} width={100} height={100}/>
+
+          </div>
         </div>
       </motion.div>}
 

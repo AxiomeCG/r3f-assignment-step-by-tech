@@ -11,8 +11,8 @@ export function FloorLamp(props) {
   const snap = useSnapshot(state)
 
   useFrame(() => {
-    pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 6 : 0, 0.05);
-    materialRef.current.emissiveIntensity = MathUtils.lerp(materialRef.current.emissiveIntensity, isOnRef.current ? 7 : 0, 0.05);
+    pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 6 : 0, 0.1);
+    materialRef.current.emissiveIntensity = MathUtils.lerp(materialRef.current.emissiveIntensity, isOnRef.current ? 7 : 0, 0.1);
   })
   const [hovered, setHovered] = useState(false)
   useEffect(() => {

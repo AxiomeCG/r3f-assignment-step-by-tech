@@ -11,7 +11,7 @@ export function TableLamp(props) {
   const snap = useSnapshot(state)
 
   useFrame(() => {
-    pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 30 : 0, 0.05);
+    pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 30 : 0, 0.1);
   })
   const [hovered, setHovered] = useState(false)
   useEffect(() => {
