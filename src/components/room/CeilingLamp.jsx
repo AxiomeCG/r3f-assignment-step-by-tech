@@ -4,6 +4,7 @@ import {MathUtils} from 'three';
 import {Sphere} from '@react-three/drei';
 import {state} from '../../store.js';
 import {useSnapshot} from 'valtio';
+import {damp} from 'maath/easing';
 
 export function CeilingLamp(props) {
   const pointLightRef = useRef()
@@ -11,9 +12,10 @@ export function CeilingLamp(props) {
   const material = useMemo(() => props.materials.Plastico.clone(), []);
   const snap = useSnapshot(state)
 
-  useFrame(() => {
-    pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 20 : 0, 0.1);
-    material.emissiveIntensity = MathUtils.lerp(material.emissiveIntensity, isOnRef.current ? 7 : 0, 0.1);
+  useFrame((state, delta) => {
+
+    damp(pointLightRef.current, "intensity", isOnRef.current ? 20 : 0, 0.1, delta)
+
   })
   const [hovered, setHovered] = useState(false)
   useEffect(() => {

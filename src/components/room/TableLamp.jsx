@@ -4,14 +4,16 @@ import {MathUtils} from 'three';
 import {Sphere} from '@react-three/drei';
 import {useSnapshot} from 'valtio';
 import {state} from '../../store.js';
+import {damp} from 'maath/easing';
 
 export function TableLamp(props) {
   const pointLightRef = useRef()
   const isOnRef = useRef(true)
   const snap = useSnapshot(state)
 
-  useFrame(() => {
-    pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 30 : 0, 0.1);
+  useFrame((state, delta) => {
+    damp(pointLightRef.current, "intensity", isOnRef.current ? 30 : 0, 0.1, delta)
+
   })
   const [hovered, setHovered] = useState(false)
   useEffect(() => {
@@ -35,7 +37,7 @@ export function TableLamp(props) {
             }}
     />
 
-    <pointLight ref={pointLightRef} position={[0, -2, 0]} intensity={40} color={'#f8e5bd'}>
+    <pointLight ref={pointLightRef} position={[0, -2, 0]} intensity={30} color={'#f8e5bd'}>
       {/*<Helper type={PointLightHelper}/>*/}
     </pointLight>
     <mesh
