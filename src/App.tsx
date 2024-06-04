@@ -14,9 +14,7 @@ const Scene = () => {
 
 
   return <>
-    <Suspense fallback={null}>
-      <Room/>
-    </Suspense>
+    <Room/>
     <Preload all/>
   </>
 }
@@ -25,9 +23,20 @@ const CameraControls = () => {
   const snap = useSnapshot(state);
 
   const three = useThree();
-  return <OrbitControls enabled={!snap.pivotDragged} onChange={(e) => {
+  return <OrbitControls enabled={!snap.pivotDragged}
+                        onStart={() => {
+                          state.isOrbiting = true
+                          three.raycaster.layers.disableAll();
+                        }}
+                        onChange={(e) => {
     three.camera.position.clamp(new Vector3(-5, 1, -7), new Vector3(7, 5, 7))
-  }}/>
+  }}
+                        onEnd={() => {
+                          state.isOrbiting = false
+                          three.raycaster.layers.enableAll();
+
+                        }}
+  />
 }
 
 
@@ -176,10 +185,11 @@ function Overlay() {
 }
 
 function App() {
+
   return (
     <>
-      <Canvas camera={{position: [0, 1, 5]}} style={{overflow: "hidden"}}>
-
+      <Canvas camera={{position: [0, 1, 5]}} style={{overflow: "hidden"}} >
+        <Suspense fallback={null}>
         <Bvh firstHitOnly>
           <Scene/>
         </Bvh>
@@ -190,6 +200,7 @@ function App() {
           <Bloom intensity={0.5} mipmapBlur kernelSize={KernelSize.MEDIUM}/>
           <Vignette/>
         </EffectComposer>
+        </Suspense>
       </Canvas>
       <Overlay/>
 

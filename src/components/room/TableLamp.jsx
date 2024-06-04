@@ -22,7 +22,7 @@ export function TableLamp(props) {
             }}
             onPointerOver={(e) => {
               e.stopPropagation();
-              setHovered(true)
+              setHovered(!snap.isOrbiting)
             }}
 
             onPointerOut={(e) => {

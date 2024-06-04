@@ -41,7 +41,7 @@ export function Wall3(props) {
     geometry={props.nodes.Wall002.geometry}
     material={props.nodes.Wall002.material}
     position={[0, 0.886, -8.44]}
-    onPointerOver={() => setHovered(true)}
+    onPointerOver={() => setHovered(!snap.isOrbiting)}
     onPointerOut={() => setHovered(false)}
     onClick={() => {
       console.log('click')

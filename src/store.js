@@ -3,6 +3,7 @@ import {proxy} from 'valtio'
 export const state = proxy({
   movableObject: null,
   pivotDragged: false,
+  isOrbiting: false,
   curtainTextureIndex: 0,
   curtainMenuIsOpen: false,
   wall1MenuIsOpen: false,

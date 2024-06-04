@@ -41,7 +41,7 @@ export function Wall2(props) {
     geometry = {props.nodes.Wall001.geometry}
     material = {props.nodes.Wall001.material}
     position = {[-5.908, 2.45, - 0.229]}
-    onPointerOver={() => setHovered(true)}
+    onPointerOver={() => setHovered(!snap.isOrbiting)}
     onPointerOut={() => setHovered(false)}
     onClick={() => {
       resetMenu()

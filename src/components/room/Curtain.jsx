@@ -23,7 +23,7 @@ export function Curtain(props) {
              }}
              onPointerOver={(e) => {
                e.stopPropagation();
-               setHovered(true)
+               setHovered(!snap.isOrbiting)
              }}
 
              onPointerOut={(e) => {

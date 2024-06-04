@@ -158,7 +158,7 @@ function Stair() {
     <MeshReflectorMaterial
       mirror={0.05}
       blur={[1000, 100]}
-      resolution={1024}
+      resolution={512}
       mixBlur={10}
       mixStrength={1}
       roughness={0.1}

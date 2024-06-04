@@ -12,7 +12,7 @@ export function Ground() {
     <MeshReflectorMaterial
       mirror={0.03}
       blur={[1000, 1000]}
-      resolution={1024}
+      resolution={512}
       mixBlur={10}
       mixStrength={1}
       roughness={0.1}

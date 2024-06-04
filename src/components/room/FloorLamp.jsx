@@ -44,7 +44,7 @@ export function FloorLamp(props) {
         position={[6.32, 2.223, 5.553]}
         onPointerOver={(e) => {
           e.stopPropagation();
-          setHovered(true)
+          setHovered(!snap.isOrbiting)
         }}
 
         onPointerOut={(e) => {
