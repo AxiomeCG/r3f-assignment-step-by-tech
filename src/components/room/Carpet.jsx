@@ -1,11 +1,15 @@
 import {useSnapshot} from 'valtio';
 import {state} from '../../store.js';
 import {PivotControls} from '@react-three/drei';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 export function Carpet(props) {
 
   const snap = useSnapshot(state);
+  const [hovered, setHovered] = useState(false)
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto'
+  }, [hovered])
 
   return <PivotControls
     anchor={[-1, 0, 0]}
@@ -24,6 +28,14 @@ export function Carpet(props) {
     }}
   >
     <mesh
+      geometry={props.nodes.Carpet.geometry}
+      position={[3.558, 0.033, 2.398]}
+      rotation={[Math.PI / 2, 0, 0]}
+      visible={hovered}
+    >
+      <meshStandardMaterial color={'#ffffff'} roughness={0.5} opacity={0.5} transparent={true}/>
+    </mesh>
+    <mesh
       onClick={(e) => {
         e.stopPropagation();
         if (snap.movableObject === 'Carpet') {
@@ -32,6 +44,15 @@ export function Carpet(props) {
           state.movableObject = 'Carpet';
         }
       }}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        setHovered(true)
+      }}
+
+      onPointerOut={(e) => {
+        e.stopPropagation();
+        setHovered(false)
+      }}
       castShadow
       receiveShadow
       geometry={props.nodes.Carpet.geometry}
@@ -39,6 +60,7 @@ export function Carpet(props) {
       position={[3.558, 0.033, 2.398]}
       rotation={[Math.PI / 2, 0, 0]}
     />
+
 
   </PivotControls>
 

@@ -36,23 +36,28 @@ export function Wall1(props) {
   }, [hovered])
 
   const snap = useSnapshot(state)
-  return <mesh
-    castShadow
-    receiveShadow
-    geometry={props.nodes.Wall.geometry}
-    material={props.nodes.Wall.material}
-    position={[7.791, 2.45, -0.229]}
-    onPointerOver={() => setHovered(true)}
-    onPointerOut={() => setHovered(false)}
-    onClick={() => {
-      console.log('click')
-      resetMenu()
-      state.wall1MenuIsOpen = !state.wall1MenuIsOpen
-    }}
-  >
-    {snap.wall1TextureIndex === 0 && <meshStandardMaterial roughness={1}/>}
-    {snap.wall1TextureIndex === 1 && <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
-    {snap.wall1TextureIndex === 2 && <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
+  return (
+    <>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={props.nodes.Wall.geometry}
+        material={props.nodes.Wall.material}
+        position={[7.791, 2.45, -0.229]}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
+        onClick={() => {
+          resetMenu()
+          state.wall1MenuIsOpen = !state.wall1MenuIsOpen
+        }}
+      >
+        {snap.wall1TextureIndex === 0 && <meshStandardMaterial roughness={1}/>}
+        {snap.wall1TextureIndex === 1 &&
+          <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
+        {snap.wall1TextureIndex === 2 &&
+          <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
 
-  </mesh>
+      </mesh>
+
+    </>)
 }

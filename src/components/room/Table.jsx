@@ -1,11 +1,15 @@
 import {useSnapshot} from 'valtio';
 import {state} from '../../store.js';
 import {PivotControls} from '@react-three/drei';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 export function Table(props) {
   const snap = useSnapshot(state);
+  const [hovered, setHovered] = useState(false)
 
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto'
+  }, [hovered])
   return (
 
     <PivotControls
@@ -30,6 +34,16 @@ export function Table(props) {
                } else {
                  state.movableObject = 'Table';
                }
+             }}
+
+             onPointerOver={(e) => {
+               e.stopPropagation();
+               setHovered(true)
+             }}
+
+             onPointerOut={(e) => {
+               e.stopPropagation();
+               setHovered(false)
              }}
       >
 
@@ -82,6 +96,14 @@ export function Table(props) {
           material={props.materials.zhuoyi}
           position={[-1.694, 1.452, -4.606]}
         />
+
+        <mesh
+          geometry={props.nodes.Table.geometry}
+          position={[-1.694, 1.452, -4.606]}
+          visible={hovered}
+        >
+          <meshStandardMaterial color={'#ffffff'} roughness={0}/>
+        </mesh>
         <mesh
           castShadow
           receiveShadow

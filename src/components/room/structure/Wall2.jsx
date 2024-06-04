@@ -2,7 +2,7 @@ import {useTexture} from '@react-three/drei';
 import {RepeatWrapping} from 'three';
 import {useSnapshot} from 'valtio';
 import {resetMenu, state} from '../../../store.js';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 export function Wall2(props) {
   const [diffuse, ao, normal, roughness] = useTexture([
@@ -28,6 +28,12 @@ export function Wall2(props) {
   roughness2.repeat.set(4, 2);
   roughness2.wrapS = roughness2.wrapT = RepeatWrapping;
 
+
+  const [hovered, setHovered] = useState(false)
+
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto'
+  }, [hovered])
   const snap = useSnapshot(state)
   return <mesh
     castShadow
@@ -35,8 +41,9 @@ export function Wall2(props) {
     geometry = {props.nodes.Wall001.geometry}
     material = {props.nodes.Wall001.material}
     position = {[-5.908, 2.45, - 0.229]}
+    onPointerOver={() => setHovered(true)}
+    onPointerOut={() => setHovered(false)}
     onClick={() => {
-      console.log('click')
       resetMenu()
       state.wall2MenuIsOpen = !state.wall1MenuIsOpen
     }}

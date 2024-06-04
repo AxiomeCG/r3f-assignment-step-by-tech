@@ -1,7 +1,7 @@
 import {useTexture} from '@react-three/drei';
 import {useSnapshot} from 'valtio';
 import {resetMenu, state} from '../../store.js';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 export function Curtain(props) {
 
@@ -9,12 +9,28 @@ export function Curtain(props) {
   const [ao2, diffuse2, normal2, roughness2] = useTexture(['/curtain/leather-black/black-leather_ao.png', '/curtain/leather-black/black-leather_albedo.png', '/curtain/leather-black/black-leather_normal-ogl.png', '/curtain/leather-black/black-leather_roughness.png'])
 
   const snap = useSnapshot(state)
+
+  const [hovered, setHovered] = useState(false)
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto'
+  }, [hovered])
   return (
     <>
-      <group {...props} dispose={null} onClick={() => {
-        resetMenu()
-        state.curtainMenuIsOpen = !state.curtainMenuIsOpen
-      }}>
+      <group {...props} dispose={null}
+             onClick={() => {
+               resetMenu()
+               state.curtainMenuIsOpen = !state.curtainMenuIsOpen
+             }}
+             onPointerOver={(e) => {
+               e.stopPropagation();
+               setHovered(true)
+             }}
+
+             onPointerOut={(e) => {
+               e.stopPropagation();
+               setHovered(false)
+             }}
+      >
         <mesh
           castShadow
           receiveShadow
@@ -25,6 +41,15 @@ export function Curtain(props) {
             && <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
           {snap.curtainTextureIndex === 1
             && <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
+        </mesh>
+
+        <mesh
+
+          geometry={props.geometry}
+          material={props.materials.Curtain}
+          visible={hovered}
+        >
+          <meshStandardMaterial color={'#ffffff'} roughness={0.5} opacity={0.5} transparent={true}/>
         </mesh>
       </group>
     </>
