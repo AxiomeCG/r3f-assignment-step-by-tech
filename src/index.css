@@ -1,16 +1,17 @@
 html {
-  height: 100%;
-  overflow: hidden;
+    height: 100%;
+    overflow: hidden;
 
 }
+
 body {
-  min-height: 100%;
-  margin: 0;
-  overflow: hidden;
+    min-height: 100%;
+    margin: 0;
+    overflow: hidden;
 
 }
 
 #root {
-  height: 100vh;
-  overflow: hidden;
+    height: 100vh;
+    overflow: hidden;
 }

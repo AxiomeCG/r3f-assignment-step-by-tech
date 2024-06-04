@@ -1,6 +1,5 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {useFrame} from '@react-three/fiber';
-import {MathUtils} from 'three';
 import {Sphere} from '@react-three/drei';
 import {state} from '../../store.js';
 import {useSnapshot} from 'valtio';
@@ -14,7 +13,7 @@ export function CeilingLamp(props) {
 
   useFrame((state, delta) => {
 
-    damp(pointLightRef.current, "intensity", isOnRef.current ? 20 : 0, 0.1, delta)
+    damp(pointLightRef.current, 'intensity', isOnRef.current ? 20 : 0, 0.1, delta)
 
   })
   const [hovered, setHovered] = useState(false)
@@ -86,7 +85,7 @@ export function CeilingLamp(props) {
         geometry={props.nodes.Object_42_3.geometry}
         visible={hovered}
       >
-        <meshStandardMaterial color={'#ffffff'} roughness={0.5} />
+        <meshStandardMaterial color={'#ffffff'} roughness={0.5}/>
       </mesh>
     </group>
   )

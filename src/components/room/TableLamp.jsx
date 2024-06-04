@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useFrame} from '@react-three/fiber';
-import {MathUtils} from 'three';
 import {Sphere} from '@react-three/drei';
 import {useSnapshot} from 'valtio';
 import {state} from '../../store.js';
@@ -12,7 +11,7 @@ export function TableLamp(props) {
   const snap = useSnapshot(state)
 
   useFrame((state, delta) => {
-    damp(pointLightRef.current, "intensity", isOnRef.current ? 30 : 0, 0.1, delta)
+    damp(pointLightRef.current, 'intensity', isOnRef.current ? 30 : 0, 0.1, delta)
 
   })
   const [hovered, setHovered] = useState(false)

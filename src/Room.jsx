@@ -256,7 +256,6 @@ export function Room(props) {
       <FloorLamp nodes={nodes} materials={materials}/>
 
 
-
       <TV nodes={nodes} materials={materials}/>
       <TVStand nodes={nodes} materials={materials}/>
       <Ground/>

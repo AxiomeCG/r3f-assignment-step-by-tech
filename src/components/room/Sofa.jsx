@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react'
-import {Bvh, PivotControls, useGLTF} from '@react-three/drei'
+import {PivotControls, useGLTF} from '@react-three/drei'
 import {state} from '../../store.js';
 import {useSnapshot} from 'valtio';
 
@@ -34,67 +34,67 @@ export function Sofa(props) {
       }}
     >
 
-        <group {...props} dispose={null}
-               onClick={(e) => {
-                 e.stopPropagation();
-                 if (snap.movableObject === 'Sofa') {
-                   state.movableObject = null;
-                 } else {
-                   state.movableObject = 'Sofa';
-                 }
-               }}
+      <group {...props} dispose={null}
+             onClick={(e) => {
+               e.stopPropagation();
+               if (snap.movableObject === 'Sofa') {
+                 state.movableObject = null;
+               } else {
+                 state.movableObject = 'Sofa';
+               }
+             }}
 
-               onPointerOver={(e) => {
-                 e.stopPropagation();
-                 setHovered(!snap.isOrbiting)
-               }}
+             onPointerOver={(e) => {
+               e.stopPropagation();
+               setHovered(!snap.isOrbiting)
+             }}
 
-               onPointerOut={(e) => {
-                 e.stopPropagation();
-                 setHovered(false)
-               }}
-        >
-          <group position={[6.088, 0.665, 1.187]} rotation={[Math.PI / 2, 0, 0]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Sofa001_1.geometry}
-              material={materials['Mat3d66-713023-7-5315']}
+             onPointerOut={(e) => {
+               e.stopPropagation();
+               setHovered(false)
+             }}
+      >
+        <group position={[6.088, 0.665, 1.187]} rotation={[Math.PI / 2, 0, 0]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Sofa001_1.geometry}
+            material={materials['Mat3d66-713023-7-5315']}
 
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Sofa001_2.geometry}
-              material={materials['15 - Default']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Sofa001_2.geometry}
+            material={materials['15 - Default']}
 
-            />
+          />
 
-            <mesh
-              geometry={nodes.Sofa001_2.geometry}
-              visible={hovered}
-            >
-              <meshStandardMaterial color={'#ffffff'} roughness={0} transparent opacity={0.5}/>
-            </mesh>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Sofa001_3.geometry}
-            >
+          <mesh
+            geometry={nodes.Sofa001_2.geometry}
+            visible={hovered}
+          >
+            <meshStandardMaterial color={'#ffffff'} roughness={0} transparent opacity={0.5}/>
+          </mesh>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Sofa001_3.geometry}
+          >
 
-              {footMaterial}
+            {footMaterial}
 
-            </mesh>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Sofa001_4.geometry}
+          </mesh>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Sofa001_4.geometry}
 
-            >
-              {footMaterial}
-            </mesh>
-          </group>
+          >
+            {footMaterial}
+          </mesh>
         </group>
+      </group>
 
     </PivotControls>
   )

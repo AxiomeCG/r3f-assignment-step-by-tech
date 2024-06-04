@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {MathUtils} from 'three';
 import {useSnapshot} from 'valtio';
 import {state} from '../../store.js';
-import {ContactShadows, PivotControls} from '@react-three/drei';
+import {PivotControls} from '@react-three/drei';
 
 export function Chair(props) {
   const uuid = useMemo(() => MathUtils.generateUUID(), [])

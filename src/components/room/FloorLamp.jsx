@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useFrame} from '@react-three/fiber';
-import {MathUtils} from 'three';
 import {useSnapshot} from 'valtio';
 import {state} from '../../store.js';
 import {damp} from 'maath/easing';
@@ -12,8 +11,8 @@ export function FloorLamp(props) {
   const snap = useSnapshot(state)
 
   useFrame((state, delta) => {
-    damp(pointLightRef.current, "intensity", isOnRef.current ? 6 : 0, 0.1, delta)
-    damp(materialRef.current, "emissiveIntensity", isOnRef.current ? 7 : 0, 0.1, delta)
+    damp(pointLightRef.current, 'intensity', isOnRef.current ? 6 : 0, 0.1, delta)
+    damp(materialRef.current, 'emissiveIntensity', isOnRef.current ? 7 : 0, 0.1, delta)
   })
   const [hovered, setHovered] = useState(false)
   useEffect(() => {

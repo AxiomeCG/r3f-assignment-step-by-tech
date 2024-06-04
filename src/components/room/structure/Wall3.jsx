@@ -50,8 +50,10 @@ export function Wall3(props) {
     }}
   >
     {snap.wall3TextureIndex === 0 && <meshStandardMaterial roughness={1}/>}
-    {snap.wall3TextureIndex === 1 && <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
-    {snap.wall3TextureIndex === 2 && <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
+    {snap.wall3TextureIndex === 1 &&
+      <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
+    {snap.wall3TextureIndex === 2 &&
+      <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
 
   </mesh>
 }

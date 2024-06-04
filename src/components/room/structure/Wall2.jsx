@@ -38,9 +38,9 @@ export function Wall2(props) {
   return <mesh
     castShadow
     receiveShadow
-    geometry = {props.nodes.Wall001.geometry}
-    material = {props.nodes.Wall001.material}
-    position = {[-5.908, 2.45, - 0.229]}
+    geometry={props.nodes.Wall001.geometry}
+    material={props.nodes.Wall001.material}
+    position={[-5.908, 2.45, -0.229]}
     onPointerOver={() => setHovered(!snap.isOrbiting)}
     onPointerOut={() => setHovered(false)}
     onClick={() => {
@@ -49,8 +49,10 @@ export function Wall2(props) {
     }}
   >
     {snap.wall2TextureIndex === 0 && <meshStandardMaterial roughness={1}/>}
-    {snap.wall2TextureIndex === 1 && <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
-    {snap.wall2TextureIndex === 2 && <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
+    {snap.wall2TextureIndex === 1 &&
+      <meshStandardMaterial map={diffuse} aoMap={ao} normalMap={normal} roughnessMap={roughness}/>}
+    {snap.wall2TextureIndex === 2 &&
+      <meshStandardMaterial map={diffuse2} aoMap={ao2} normalMap={normal2} roughnessMap={roughness2}/>}
 
   </mesh>
 }
