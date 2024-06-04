@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <Canvas camera={{position: [0, 1, 5]}} style={{overflow: "hidden"}}>
+      <Canvas camera={{position: [0, 2, 5]}} style={{overflow: "hidden"}}>
         <Suspense fallback={null}>
           <Bvh firstHitOnly>
             <Scene/>
