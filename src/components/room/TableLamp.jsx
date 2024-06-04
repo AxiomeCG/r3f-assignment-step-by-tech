@@ -2,10 +2,14 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useFrame} from '@react-three/fiber';
 import {MathUtils} from 'three';
 import {Sphere} from '@react-three/drei';
+import {useSnapshot} from 'valtio';
+import {state} from '../../store.js';
 
 export function TableLamp(props) {
   const pointLightRef = useRef()
   const isOnRef = useRef(true)
+  const snap = useSnapshot(state)
+
   useFrame(() => {
     pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 30 : 0, 0.05);
   })

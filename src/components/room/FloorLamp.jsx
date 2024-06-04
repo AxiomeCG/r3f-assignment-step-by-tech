@@ -1,11 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useFrame} from '@react-three/fiber';
 import {MathUtils} from 'three';
+import {useSnapshot} from 'valtio';
+import {state} from '../../store.js';
 
 export function FloorLamp(props) {
   const pointLightRef = useRef()
   const materialRef = useRef()
   const isOnRef = useRef(true)
+  const snap = useSnapshot(state)
 
   useFrame(() => {
     pointLightRef.current.intensity = MathUtils.lerp(pointLightRef.current.intensity, isOnRef.current ? 6 : 0, 0.05);
